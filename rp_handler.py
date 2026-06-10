@@ -5,6 +5,8 @@ import io
 import tempfile
 import requests
 
+import runpod
+
 import numpy as np
 import rembg
 import torch
