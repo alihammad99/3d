@@ -5,6 +5,9 @@ FROM nvidia/cuda:12.1.0-cudnn8-devel-ubuntu22.04
 
 ENV PYTHONUNBUFFERED=1
 ENV DEBIAN_FRONTEND=noninteractive
+ENV CUDA_HOME=/usr/local/cuda
+ENV PATH="${CUDA_HOME}/bin:${PATH}"
+ENV LD_LIBRARY_PATH="${CUDA_HOME}/lib64:${LD_LIBRARY_PATH}"
 
 # ---------------------------------------------------------------------------
 # System dependencies
@@ -55,12 +58,17 @@ RUN pip install --no-cache-dir \
     onnxruntime-gpu
 
 # torchmcubes must be built from source (no wheel on PyPI)
-RUN pip install --no-cache-dir git+https://github.com/tatsy/torchmcubes.git
+# Clone manually to avoid pip's git subprocess PATH issues during build
+RUN git clone https://github.com/tatsy/torchmcubes.git /tmp/torchmcubes \
+    && pip install --no-cache-dir /tmp/torchmcubes \
+    && rm -rf /tmp/torchmcubes
 
 # ---------------------------------------------------------------------------
 # Install TripoSR
 # ---------------------------------------------------------------------------
-RUN pip install --no-cache-dir git+https://github.com/VAST-AI-Research/TripoSR.git
+RUN git clone https://github.com/VAST-AI-Research/TripoSR.git /tmp/TripoSR \
+    && pip install --no-cache-dir /tmp/TripoSR \
+    && rm -rf /tmp/TripoSR
 
 # ---------------------------------------------------------------------------
 # Pre-download model weights so cold-start is faster
