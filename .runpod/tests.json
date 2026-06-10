@@ -1,0 +1,38 @@
+{
+  "tests": [
+    {
+      "name": "basic_glb_generation",
+      "description": "Generate a GLB mesh from an image URL",
+      "input": {
+        "image_url": "https://images.unsplash.com/photo-1618331835717-801e976710b2?w=512&h=512&fit=crop",
+        "model_save_format": "glb",
+        "return_mode": "base64",
+        "mc_resolution": 128
+      },
+      "timeout": 120
+    },
+    {
+      "name": "obj_with_bg",
+      "description": "Generate an OBJ mesh without background removal",
+      "input": {
+        "image_url": "https://images.unsplash.com/photo-1618331835717-801e976710b2?w=512&h=512&fit=crop",
+        "no_remove_bg": true,
+        "model_save_format": "obj",
+        "return_mode": "base64",
+        "mc_resolution": 128
+      },
+      "timeout": 120
+    },
+    {
+      "name": "base64_input",
+      "description": "Generate mesh from a base64-encoded image",
+      "input": {
+        "image_base64": "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==",
+        "model_save_format": "glb",
+        "return_mode": "base64",
+        "mc_resolution": 64
+      },
+      "timeout": 120
+    }
+  ]
+}

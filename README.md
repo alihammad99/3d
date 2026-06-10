@@ -1,5 +1,7 @@
 # TripoSR RunPod Serverless
 
+[![RunPod Hub](https://img.shields.io/badge/RunPod-Hub-blue?logo=runpod)](https://runpod.io)
+
 RunPod serverless worker that converts a 2D image into a 3D mesh using [TripoSR](https://github.com/VAST-AI-Research/TripoSR).
 
 ## Files
@@ -26,17 +28,17 @@ RunPod serverless worker that converts a 2D image into a 3D mesh using [TripoSR]
 }
 ```
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `image_url` | string | — | URL of input image (alternative: `image_base64`) |
-| `image_base64` | string | — | Base64-encoded image (alternative: `image_url`) |
-| `no_remove_bg` | bool | `false` | Skip automatic background removal |
-| `foreground_ratio` | float | `0.85` | Foreground size ratio after background removal |
-| `mc_resolution` | int | `256` | Marching cubes grid resolution |
-| `model_save_format` | string | `"glb"` | Output format: `obj` or `glb` |
-| `bake_texture` | bool | `false` | Bake texture atlas instead of vertex colors |
-| `texture_resolution` | int | `2048` | Texture atlas resolution (if baking) |
-| `return_mode` | string | `"base64"` | `"base64"` (embed file) or `"path"` (local path) |
+| Field                | Type   | Default    | Description                                      |
+| -------------------- | ------ | ---------- | ------------------------------------------------ |
+| `image_url`          | string | —          | URL of input image (alternative: `image_base64`) |
+| `image_base64`       | string | —          | Base64-encoded image (alternative: `image_url`)  |
+| `no_remove_bg`       | bool   | `false`    | Skip automatic background removal                |
+| `foreground_ratio`   | float  | `0.85`     | Foreground size ratio after background removal   |
+| `mc_resolution`      | int    | `256`      | Marching cubes grid resolution                   |
+| `model_save_format`  | string | `"glb"`    | Output format: `obj` or `glb`                    |
+| `bake_texture`       | bool   | `false`    | Bake texture atlas instead of vertex colors      |
+| `texture_resolution` | int    | `2048`     | Texture atlas resolution (if baking)             |
+| `return_mode`        | string | `"base64"` | `"base64"` (embed file) or `"path"` (local path) |
 
 ## API Output (base64 mode)
 
@@ -50,7 +52,16 @@ RunPod serverless worker that converts a 2D image into a 3D mesh using [TripoSR]
 
 ## Build & Deploy
 
+### Option 1: RunPod Hub (Recommended)
+
+1. Push this repo to GitHub.
+2. In RunPod, choose **Deploy from GitHub Repo** and enter your repo URL.
+3. RunPod will auto-build from the `Dockerfile`.
+
+### Option 2: Manual Docker Build
+
 1. Build locally:
+
    ```bash
    ./build.sh
    ```

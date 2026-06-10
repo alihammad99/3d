@@ -1,0 +1,13 @@
+{
+  "title": "TripoSR 3D Mesh Generator",
+  "description": "Convert 2D images into 3D meshes (.glb/.obj) using TripoSR on RunPod Serverless",
+  "type": "serverless",
+  "category": "image-to-3d",
+  "icon": "🧊",
+  "config": {
+    "handler": "/rp_handler.py",
+    "env": {
+      "PYTHONUNBUFFERED": "1"
+    }
+  }
+}
