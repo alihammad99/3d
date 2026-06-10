@@ -57,18 +57,17 @@ RUN pip install --no-cache-dir \
     requests \
     onnxruntime-gpu
 
-# torchmcubes must be built from source (no wheel on PyPI)
-# Clone manually to avoid pip's git subprocess PATH issues during build
-RUN git clone https://github.com/tatsy/torchmcubes.git /tmp/torchmcubes \
-    && pip install --no-cache-dir /tmp/torchmcubes \
-    && rm -rf /tmp/torchmcubes
+# Install mcubes (pure Python, no CUDA compilation required)
+RUN pip install --no-cache-dir PyMCubes
 
 # ---------------------------------------------------------------------------
-# Install TripoSR
+# Install TripoSR (clone, patch away torchmcubes, then install locally)
 # ---------------------------------------------------------------------------
+COPY patch_isosurface.py /tmp/patch_isosurface.py
 RUN git clone https://github.com/VAST-AI-Research/TripoSR.git /tmp/TripoSR \
+    && python /tmp/patch_isosurface.py /tmp/TripoSR/tsr/models/isosurface.py \
     && pip install --no-cache-dir /tmp/TripoSR \
-    && rm -rf /tmp/TripoSR
+    && rm -rf /tmp/TripoSR /tmp/patch_isosurface.py
 
 # ---------------------------------------------------------------------------
 # Pre-download model weights so cold-start is faster
