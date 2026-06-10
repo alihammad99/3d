@@ -1,6 +1,6 @@
 # TripoSR RunPod Serverless
 
-[![RunPod Hub](https://img.shields.io/badge/RunPod-Hub-blue?logo=runpod)](https://runpod.io)
+[![RunPod](https://api.runpod.io/badge/alihammad99/3d)](https://console.runpod.io/hub/alihammad99/3d)
 
 RunPod serverless worker that converts a 2D image into a 3D mesh using [TripoSR](https://github.com/VAST-AI-Research/TripoSR).
 
